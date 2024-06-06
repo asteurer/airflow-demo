@@ -1,0 +1,7 @@
+.idea
+logs
+plugins
+config
+**/__pycache__
+localstack
+
