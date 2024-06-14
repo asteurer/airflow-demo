@@ -83,6 +83,7 @@ dags:
   persistence:
     enabled: false
   gitsync:
+    knownHosts: github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/
     enabled: true
     depth: 1
     repo: ssh://git@github.com:asteurer/demo-airflow.git
