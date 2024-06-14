@@ -1,0 +1,4 @@
+infra/aks-cluster/terraform/.terraform*
+infra/aks-cluster/terraform/terraform.tfstate*
+infra/s3-bucket/terraform/.terraform*
+infra/s3-bucket/terraform/terraform.tfstate*
