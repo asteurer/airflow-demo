@@ -1,1 +1,1 @@
-INPUT_FILE_NAME = "file.txt"
+INPUT_FILE_NAME = "/home/admin/file.txt"
