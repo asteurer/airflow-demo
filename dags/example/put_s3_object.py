@@ -2,14 +2,14 @@ from airflow.decorators import dag, task
 from airflow.utils.dates import days_ago
 from airflow.providers.http.operators.http import HttpOperator
 from airflow.providers.sftp.operators.sftp import SFTPOperator
-from example.config import INPUT_FILE_NAME
+from example.config import INPUT_FILE_NAME, INPUT_FILE_PATH
 
 @dag(schedule_interval=None, start_date=days_ago(1), catchup=False)
 def put_s3_object():
     get_file = SFTPOperator(
         task_id='get_file',
         ssh_conn_id='ftp_server',
-        remote_filepath=INPUT_FILE_NAME,
+        remote_filepath=INPUT_FILE_PATH + INPUT_FILE_NAME,
         local_filepath=f'/tmp/{INPUT_FILE_NAME}',
         create_intermediate_dirs=True,
         operation='get'
