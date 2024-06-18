@@ -9,7 +9,7 @@ def put_s3_object():
     get_file = SFTPOperator(
         task_id='get_file',
         ssh_conn_id='ftp_server',
-        remote_filepath=f'{INPUT_FILE_PATH}{INPUT_FILE_NAME}',
+        remote_filepath={INPUT_FILE_NAME},
         local_filepath=f'/tmp/{INPUT_FILE_NAME}',
         create_intermediate_dirs=True,
         operation='get'
