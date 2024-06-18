@@ -1,11 +1,12 @@
-#!/bin/bash
+#!/bin/zsh
 
-set -a
-source .env
-set +a
+op run --env-file=.env -- \
+    sudo docker build . \
+        --build-arg USER=$USER \
+        --build-arg PASSWORD=$PASSWORD \
+        --build-arg IMAGE_REPO=$IMAGE_REPO \
+        --build-arg IMAGE_TAG=$IMAGE_TAG
 
-python -m virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
 
-spin up --build --listen 0.0.0.0:3000
+# op run --env-file=.env -- \
+#     spin up --from-registry index.docker.io/asteurer/airflow-s3-client

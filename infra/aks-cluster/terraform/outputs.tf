@@ -1,10 +1,7 @@
-output "kube_config" {
-  value     = azurerm_kubernetes_cluster.aks.kube_config_raw
-  sensitive = true
+output "resource_group" {
+  value = azurerm_resource_group.rg.name
 }
 
-# TODO: see monitoring.tf
-#
-# output "grafana_endpoint" {
-#   value = azurerm_dashboard_grafana.grafana.endpoint
-# }
+output "aks_cluster" {
+  value = azurerm_kubernetes_cluster.aks.name
+}

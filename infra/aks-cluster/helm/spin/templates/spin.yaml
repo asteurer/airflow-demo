@@ -1,0 +1,63 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: spinapp-vars
+data:
+  AWS_ACCESS_KEY_ID: {{ .Values.env.AWS_ACCESS_KEY_ID | b64enc }}
+  AWS_SECRET_ACCESS_KEY: {{ .Values.env.AWS_SECRET_ACCESS_KEY | b64enc }}
+  AWS_SESSION_TOKEN: {{ .Values.env.AWS_SESSION_TOKEN | b64enc }}
+  AWS_DEFAULT_REGION: {{ .Values.env.AWS_DEFAULT_REGION | b64enc }}
+  AWS_SERVICE: {{ .Values.env.AWS_SERVICE | b64enc }}
+  AWS_HOST: {{ .Values.env.AWS_HOST | b64enc }}
+
+---
+
+kind: SpinApp
+apiVersion: core.spinoperator.dev/v1alpha1
+metadata:
+  # This is what's used to create the service for accessing the actual spin app over the kubernetes network
+  name: {{ .Values.spinAppName }}
+  # labels:
+  #   app: spin
+spec:
+  replicas: 1
+  image: {{ .Values.image }}
+  executor: containerd-shim-spin
+  variables: 
+      # Notice how the variable name doesn't have 'SPIN_VARIABLE' prepended. The spin operator in Kubernetes does this automatically.
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_ACCESS_KEY_ID
+          optional: false
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_SECRET_ACCESS_KEY
+          optional: false
+    - name: AWS_SESSION_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_SESSION_TOKEN
+          optional: false
+    - name: AWS_DEFAULT_REGION
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_DEFAULT_REGION
+          optional: false
+    - name: AWS_SERVICE
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_SERVICE
+          optional: false
+    - name: AWS_HOST
+      valueFrom:
+        secretKeyRef:
+          name: spinapp-vars
+          key: AWS_HOST
+          optional: false

@@ -1,5 +1,5 @@
 variable "prefix" {
-  default = ""
+  default = "asteurer"
 }
 
 variable "location" {
@@ -74,23 +74,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-# TODO: see monitoring.tf
-#
-# variable "grafana_admins" {
-#   description = "List of object id's to be assigned as Grafana admins"
-#   type = list(string)
-#   default = []
-# }
-
-# variable "metric_annotations_allowlist" {
-#   description = "Specifies a list of Kubernetes annotation keys that will be used in the resource's labels metric."
-#   type        = list(string)
-#   default     = []
-# }
-
-# variable "metric_labels_allowlist" {
-#   description = "(Optional) Specifies a Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric."
-#   type        = list(string)
-#   default     = []
-# }

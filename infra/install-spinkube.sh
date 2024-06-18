@@ -1,10 +1,20 @@
 #!/bin/zsh
 
+if [ -z "$1" ] then;
+  echo "Please supply a namespace" 
+  exit 1
+fi
+
+NAMESPACE = "$1"
+
 # Install the CRDs
 kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.crds.yaml
 
 # Install the Runtime Class
-kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.runtime-class.yaml
+# The commented line below installs the default runtime class; however, when there are node pools, this needs to be altered
+# kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.runtime-class.yaml
+# Altered runtime class
+kubectl apply -f spin-operator.runtime-class.yaml
 
 # Install cert-manager CRDs
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.14.3/cert-manager.crds.yaml
@@ -19,7 +29,7 @@ helm install cert-manager jetstack/cert-manager \
   --create-namespace \
   --version v1.14.3
 
-  # Add Helm repository if not already done
+# Add Helm repository if not already done
 helm repo add kwasm http://kwasm.sh/kwasm-operator/
 helm repo update
 
@@ -43,5 +53,9 @@ helm install spin-operator \
   --wait \
   oci://ghcr.io/spinkube/charts/spin-operator
 
-kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.shim-executor.yaml
+# Create the namespace in which your spin apps will be running
+kubectl create namespace spin-apps
+
+# The shim-executor needs to be installed in the same namespace as the spin apps
+kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.shim-executor.yaml -n "$NAMESPACE"
 

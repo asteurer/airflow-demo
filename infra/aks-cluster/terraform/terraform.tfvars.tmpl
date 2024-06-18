@@ -18,24 +18,8 @@ user_nodepools = [{
     "runtime" = "containerd-shim-spin"
   }
   taints = []
-},
-{
-  name       = "system"
-  size       = "Standard_D2s_v5"
-  node_count = 1
-  max_pods   = 100
-  labels = {
-    "workload" = "system"
-  }
-  taints = []
 }]
 
 tags = {
-  "Purpose" = "Testing SpinKube Performance"
+  "Purpose" = "Client demo"
 }
-
-# TODO: see monitoring.tf
-#
-# to set the current user as an admin you can get your user id from the az cli
-# example: az ad signed-in-user show -o tsv --query id
-# grafana_admins = [  ]

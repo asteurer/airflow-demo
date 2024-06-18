@@ -50,18 +50,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id               = azurerm_subnet.aks.id
   }
 
-  # TODO: see monitoring.tf
-  #
-  # oms_agent {
-  #   log_analytics_workspace_id      = azurerm_log_analytics_workspace.main.id
-  #   msi_auth_for_monitoring_enabled = true
-  # }
-
-  # monitor_metrics {
-  #   annotations_allowed = length(var.metric_annotations_allowlist) > 0 ? join(",", var.metric_annotations_allowlist) : null
-  #   labels_allowed      = length(var.metric_labels_allowlist) > 0 ? join(",", var.metric_labels_allowlist) : null
-  # }
-
   identity {
     type = "SystemAssigned"
   }
