@@ -3,3 +3,4 @@ infra/aks-cluster/terraform/terraform.tfstate*
 infra/s3-bucket/terraform/.terraform*
 infra/s3-bucket/terraform/terraform.tfstate*
 infra/aks-cluster/terraform/*.json
+infra/aks-cluster/helm/spin/values.yaml
