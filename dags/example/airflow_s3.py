@@ -13,7 +13,7 @@ session = boto3.Session(aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
 s3 = session.client('s3')
 
 @dag(schedule_interval=None, start_date=days_ago(1), catchup=False)
-def s3_example_dag():
+def airflow_s3():
     get_file = SFTPOperator(
         task_id='get_file',
         ssh_conn_id='ftp_server',
@@ -35,4 +35,4 @@ def s3_example_dag():
 
     get_file >> send_s3
 
-s3_example_dag = s3_example_dag()
+airflow_s3 = airflow_s3()

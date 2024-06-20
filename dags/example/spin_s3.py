@@ -5,7 +5,7 @@ from airflow.providers.sftp.operators.sftp import SFTPOperator
 from example.config import INPUT_FILE_NAME
 
 @dag(schedule_interval=None, start_date=days_ago(1), catchup=False)
-def put_s3_object():
+def spin_s3():
     get_file = SFTPOperator(
         task_id='get_file',
         ssh_conn_id='ftp_server',
@@ -32,4 +32,4 @@ def put_s3_object():
 
     get_file >> file_content >> send_to_s3
 
-put_s3_object = put_s3_object()
+spin_s3 = spin_s3()
