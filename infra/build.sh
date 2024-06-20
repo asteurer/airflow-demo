@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-
-
 # Creating and accessing the Azure infrastructure
 cd aks-cluster/terraform
 terraform apply --auto-approve && terraform output -json > outputs.json
@@ -15,17 +13,14 @@ terraform apply --auto-approve
 
 cd ../..
 
-SPIN_NAMESPACE = spin-apps
-FTP_NAMESPACE = ftp-server
-
 kubectl create namespace airflow
-kubectl create namespace "$FTP_NAMESPACE"
-kubectl create namespace "$SPIN_NAMESPACE"
+kubectl create namespace ftp-server
+kubectl create namespace spin-apps
 
-./install-spinkube.sh "$SPIN_NAMESPACE"
+./install-spinkube.sh
 
-helm install ftp-server ./aks-cluster/helm/ftp-server -n "$FTP_NAMESPACE"
-helm install s3-app ./aks-cluster/helm/spin -n "$SPIN_NAMESPACE"
+helm install ftp-server ./aks-cluster/helm/ftp-server -n ftp-server
+helm install s3-app ./aks-cluster/helm/spin -n spin-apps
 helm install airflow apache-airflow/airflow -n airflow -f aks-cluster/helm/airflow/values.yaml --debug
 
 sleep 30

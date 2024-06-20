@@ -2,7 +2,7 @@ from airflow.decorators import dag, task
 from airflow.utils.dates import days_ago
 from airflow.providers.http.operators.http import HttpOperator
 from airflow.providers.sftp.operators.sftp import SFTPOperator
-from example.config import INPUT_FILE_NAME, INPUT_FILE_PATH
+from example.config import INPUT_FILE_NAME
 
 @dag(schedule_interval=None, start_date=days_ago(1), catchup=False)
 def put_s3_object():

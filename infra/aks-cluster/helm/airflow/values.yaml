@@ -790,6 +790,8 @@ workers:
 
 # Airflow scheduler settings
 scheduler:
+  extraPipPackages:
+    - "boto3==1.34.130"
   enabled: true
   #  hostAliases for the scheduler pod
   hostAliases: []

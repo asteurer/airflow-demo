@@ -1,12 +1,5 @@
 #!/bin/zsh
 
-if [ -z "$1" ] then;
-  echo "Please supply a namespace" 
-  exit 1
-fi
-
-NAMESPACE = "$1"
-
 # Install the CRDs
 kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.crds.yaml
 
@@ -57,5 +50,5 @@ helm install spin-operator \
 kubectl create namespace spin-apps
 
 # The shim-executor needs to be installed in the same namespace as the spin apps
-kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.shim-executor.yaml -n "$NAMESPACE"
+kubectl apply -f https://github.com/spinkube/spin-operator/releases/download/v0.2.0/spin-operator.shim-executor.yaml -n spin-apps
 
